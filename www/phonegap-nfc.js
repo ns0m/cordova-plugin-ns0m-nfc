@@ -735,7 +735,7 @@ var util = {
      * Convert an ArrayBuffer to a hex string
      *
      * @param {ArrayBuffer} buffer
-     * @returns {srting} - hex representation of bytes e.g. 000407AF
+     * @returns {string} - hex representation of bytes e.g. 000407AF
      */
     arrayBufferToHexString: function(buffer) {
         function toHexString(byte) {
