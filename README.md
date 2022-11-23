@@ -1,3 +1,10 @@
+### Publication-only version of the [chariotsolutions/phonegap-nfc](https://github.com/chariotsolutions/phonegap-nfc) package with some early fixes. [![Latest Published Version](https://img.shields.io/npm/v/cordova-plugin-ns0m-nfc)](https://www.npmjs.com/package/cordova-plugin-ns0m-nfc)
+```
+cordova plugin add cordova-plugin-ns0m-nfc@1.3.0-1
+```
+
+---
+
 PhoneGap NFC Plugin
 ==========================
 
@@ -71,6 +78,20 @@ The `scanNdef` function uses [NFCNDEFReaderSession](https://developer.apple.com/
 You must call [nfc.scanNdef](#nfcscanndef) and [nfc.scanTag](#nfcscantag) before every scan. 
 
 Writing NFC tags on iOS uses the same [nfc.write](#nfcwrite) function as other platforms. Although it's the same function, the behavior is different on iOS. Calling `nfc.write` on an iOS device will start a new scanning session and write data to the scanned tag.
+
+To localize alert message strings use `Localizable.strings` files with these keys:
+`"NFCHoldNearTag": "Hold near NFC tag to scan."`
+`"NFCHoldNearWritableTag": "Hold near writable NFC tag to update."` 
+`"NFCMoreThanOneTag": "More than 1 tag detected. Please remove all tags and try again."`
+`"NFCTagRead": "Tag successfully read."`
+`"NFCDataWrote": "Wrote data to NFC tag."`
+`"NFCDataWriteFailed": "Write failed."`
+`"NFCDataReadFailed": "Read Failed."`
+`"NFCReadOnlyTag": "Tag is read only."`
+`"NFCUnknownNdefTag": "Unknown NDEF tag status."`
+`"NFCNotNdefCompliant": "Tag is not NDEF compliant."`
+`"NFCErrorTagStatus": "Error getting tag status."`
+`"NFCErrorTagConnection": "Error connecting to tag."`
 
 # NFC
 

@@ -35,7 +35,7 @@ nfc.share = function(ndefMessage, success, failure) {
 
     // previously we used the invoke plugin, but now it encodes improperly
     // blackberry.invoke.invoke(query, success, failure);
-    
+
     // call native invoke directly
     cordova.exec(success, failure, "com.blackberry.invoke", "invoke", {request: query});
 };

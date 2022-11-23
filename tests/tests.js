@@ -1,5 +1,5 @@
 exports.defineAutoTests = function () {
-    
+
     describe('NFC object', function () {
         it("nfc should exist", function () {
             expect(nfc).toBeDefined();
@@ -20,7 +20,7 @@ exports.defineAutoTests = function () {
             expect(typeof nfc.transceive).toBe("function");
         });
     });
-    
+
     describe('UTF-8 Encoding and Decoding', function() {
         // https://github.com/don/ndef-js/blob/master/test/util.js
 
@@ -52,11 +52,11 @@ exports.defineAutoTests = function () {
 
             var encoded = util.stringToBytes(russian);
             expect(encoded).toEqual(russianBytes);
-            
+
 
             var decoded = util.bytesToString(russianBytes);
             expect(decoded).toEqual(russian);
-            
+
         });
 
         it('should round trip encode and decode UTF-8', function() {
@@ -67,11 +67,11 @@ exports.defineAutoTests = function () {
             expect(roundTrip).toEqual(chinese);
 
             var korean = "나는 유리를 먹을 수 있어요. 그래도 아프지 않아요";
-            roundTrip = util.bytesToString(util.stringToBytes(korean));            
-            expect(roundTrip).toEqual(korean);            
+            roundTrip = util.bytesToString(util.stringToBytes(korean));
+            expect(roundTrip).toEqual(korean);
 
             var url = "http://example.com/with-utf8-✓";
-            roundTrip = util.bytesToString(util.stringToBytes(url));                        
+            roundTrip = util.bytesToString(util.stringToBytes(url));
             expect(roundTrip).toEqual(url);
 
         });
@@ -106,7 +106,7 @@ exports.defineAutoTests = function () {
             // - delimiter
             var buffer = util.hexStringToArrayBuffer('68-65-6c-6c-6f-2c-20-77-6f-72-6c-64');
             expect(new Uint8Array(buffer)).toEqual(new Uint8Array([0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64]));
-            
+
         });
     });
 
@@ -114,7 +114,7 @@ exports.defineAutoTests = function () {
 
         it('should reject invalid input', function(done) {
             var promise = nfc.transceive(42);
-            
+
             promise.then(
                 function resolve() {
                     throw new Error('Promise should not be resolved');

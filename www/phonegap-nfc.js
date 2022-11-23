@@ -410,7 +410,7 @@ var ndef = {
 
 // nfc provides javascript wrappers to the native phonegap implementation
 var nfc = {
-    
+
     multiCallbackTest: function(success, failure) {
         cordova.exec(success, failure, "NfcPlugin", "multiCallbackTest", []);
     },
@@ -419,7 +419,7 @@ var nfc = {
     //     //cordova.exec(success, failure, "NfcPlugin", "multiCallbackTest", []);
     //     setInterval(failure, 10000, 'Test from JavaScript!');
     // },
-    
+
     addTagDiscoveredListener: function (callback, win, fail) {
         document.addEventListener("tag", callback, false);
         cordova.exec(win, fail, "NfcPlugin", "registerTag", []);
@@ -440,10 +440,10 @@ var nfc = {
         cordova.exec(win, fail, "NfcPlugin", "registerNdefFormatable", []);
     },
 
-    write: function (ndefMessage, win, fail, options) {      
-        
+    write: function (ndefMessage, win, fail, options) {
+
         if (cordova.platformId === "ios") {
-          cordova.exec(win, fail, "NfcPlugin", "writeTag", [ndefMessage, options]);        
+          cordova.exec(win, fail, "NfcPlugin", "writeTag", [ndefMessage, options]);
         } else {
           cordova.exec(win, fail, "NfcPlugin", "writeTag", [ndefMessage]);
         }
@@ -513,7 +513,7 @@ var nfc = {
             cordova.exec(resolve, reject, "NfcPlugin", "scanTag", [options]);
         });
     },
-    
+
     // iOS only - cancel NFC scan session
     cancelScan: function () {
         return new Promise(function(resolve, reject) {
@@ -566,7 +566,7 @@ var nfc = {
         });
     },
 
-    // Android NfcAdapter.enableReaderMode flags 
+    // Android NfcAdapter.enableReaderMode flags
     FLAG_READER_NFC_A: 0x1,
     FLAG_READER_NFC_B: 0x2,
     FLAG_READER_NFC_F: 0x4,
@@ -574,7 +574,7 @@ var nfc = {
     FLAG_READER_NFC_BARCODE: 0x10,
     FLAG_READER_SKIP_NDEF_CHECK: 0x80,
     FLAG_READER_NO_PLATFORM_SOUNDS: 0x100,
-    
+
     // Android NfcAdapter.enabledReaderMode
     readerMode: function(flags, readCallback, errorCallback) {
         cordova.exec(readCallback, errorCallback, 'NfcPlugin', 'readerMode', [flags]);
@@ -735,7 +735,7 @@ var util = {
      * Convert an ArrayBuffer to a hex string
      *
      * @param {ArrayBuffer} buffer
-     * @returns {srting} - hex representation of bytes e.g. 000407AF 
+     * @returns {srting} - hex representation of bytes e.g. 000407AF
      */
     arrayBufferToHexString: function(buffer) {
         function toHexString(byte) {
@@ -894,12 +894,12 @@ window.ndef = ndef;
 window.util = util;
 window.fireNfcTagEvent = fireNfcTagEvent;
 
-// This channel receives nfcEvent data from native code 
+// This channel receives nfcEvent data from native code
 // and fires JavaScript events.
 require('cordova/channel').onCordovaReady.subscribe(function() {
   require('cordova/exec')(success, null, 'NfcPlugin', 'channel', []);
   function success(message) {
-    if (!message.type) { 
+    if (!message.type) {
         console.log(message);
     } else {
         console.log("Received NFC data, firing '" + message.type + "' event");
