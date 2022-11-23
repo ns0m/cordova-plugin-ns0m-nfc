@@ -1,6 +1,6 @@
 ### Publication-only version of the [chariotsolutions/phonegap-nfc](https://github.com/chariotsolutions/phonegap-nfc) package with some early fixes. [![Latest Published Version](https://img.shields.io/npm/v/cordova-plugin-ns0m-nfc)](https://www.npmjs.com/package/cordova-plugin-ns0m-nfc)
 ```
-cordova plugin add cordova-plugin-ns0m-nfc@1.2.0
+cordova plugin add cordova-plugin-ns0m-nfc@1.3.0-1
 ```
 
 ---
