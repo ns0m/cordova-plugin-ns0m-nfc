@@ -14,10 +14,10 @@ function handleNfcFromIntentFilter() {
             function () {
                 cordova.exec(
                     function () {
-                        console.log("Initialized the NfcPlugin");
+                        console.debug("Initialized the NfcPlugin");
                     },
                     function (reason) {
-                        console.log("Failed to initialize the NfcPlugin " + reason);
+                        console.warn("Failed to initialize the NfcPlugin " + reason);
                     },
                     "NfcPlugin", "init", []
                 );
@@ -175,7 +175,7 @@ var ndef = {
                 payload = ndefRecords;
             }
         } else {
-            console.log("WARNING: Expecting an array of NDEF records");
+            console.warn("WARNING: Expecting an array of NDEF records");
         }
 
         return ndef.record(ndef.TNF_WELL_KNOWN, ndef.RTD_SMART_POSTER, id, payload);
@@ -764,13 +764,13 @@ var util = {
 
         // ensure even number of characters
         if (hexString.length % 2 != 0) {
-            console.log('WARNING: expecting an even number of characters in the hexString');
+            console.warn('WARNING: expecting an even number of characters in the hexString');
         }
 
         // check for some non-hex characters
         var bad = hexString.match(/[G-Z\s]/i);
         if (bad) {
-            console.log('WARNING: found non-hex characters', bad);
+            console.warn('WARNING: found non-hex characters', bad);
         }
 
         // split the string into pairs of octets
@@ -796,7 +796,7 @@ var textHelper = {
 
         // TODO need to deal with UTF in the future
         if (utf16) {
-            console.log('WARNING: utf-16 data may not be handled properly for', languageCode);
+            console.warn('WARNING: utf-16 data may not be handled properly for', languageCode);
         }
         // Use TextDecoder when we have enough browser support
         // new TextDecoder('utf-8').decode(data.slice(languageCodeLength + 1));
@@ -873,7 +873,6 @@ function fireNfcTagEvent(eventType, tagAsJson) {
         var e = document.createEvent('Events');
         e.initEvent(eventType, true, false);
         e.tag = JSON.parse(tagAsJson);
-        console.log(e.tag);
         document.dispatchEvent(e);
     }, 10);
 }
@@ -900,9 +899,9 @@ require('cordova/channel').onCordovaReady.subscribe(function() {
   require('cordova/exec')(success, null, 'NfcPlugin', 'channel', []);
   function success(message) {
     if (!message.type) {
-        console.log(message);
+        console.warn("Skip received NFC data, missing type in", message);
     } else {
-        console.log("Received NFC data, firing '" + message.type + "' event");
+        console.debug("Received NFC data, firing '" + message.type + "' event");
         var e = document.createEvent('Events');
         e.initEvent(message.type);
         e.tag = message.tag;
