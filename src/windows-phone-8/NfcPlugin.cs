@@ -15,10 +15,10 @@ using System.Collections;
 
 using ChariotSolutions.NFC.NDEF;
 
-// 
+//
 // http://www.nfc-forum.org/specs/spec_list/
 // http://msdn.microsoft.com/en-us/library/windows/apps/br241250.aspx
-// 
+//
 
 namespace Cordova.Extension.Commands
 {
@@ -118,7 +118,7 @@ namespace Cordova.Extension.Commands
                 string ndefMessage = JsonHelper.Deserialize<string[]>(args)[0];
                 NdefRecord[] records = JsonHelper.Deserialize<NdefRecord[]>(ndefMessage);
                 byte[] data = Ndef.toBytes(records);
-            
+
                 stopPublishing();
                 publishedMessageId = proximityDevice.PublishBinaryMessage("NDEF", data.AsBuffer());
                 DispatchCommandResult(new PluginResult(PluginResult.Status.OK));
