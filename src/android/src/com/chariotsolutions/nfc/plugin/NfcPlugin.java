@@ -468,13 +468,12 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void showSettings(CallbackContext callbackContext) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            Intent intent = new Intent(android.provider.Settings.ACTION_NFC_SETTINGS);
-            getActivity().startActivity(intent);
-        } else {
-            Intent intent = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-            getActivity().startActivity(intent);
-        }
+        Intent intent = new Intent(
+            android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN ?
+                android.provider.Settings.ACTION_NFC_SETTINGS :
+                android.provider.Settings.ACTION_WIRELESS_SETTINGS
+        );
+        getActivity().startActivity(intent);
         callbackContext.success();
     }
 
@@ -483,7 +482,10 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
             Activity activity = getActivity();
             Intent intent = new Intent(activity, activity.getClass());
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_MUTABLE);
+            pendingIntent = PendingIntent.getActivity(
+                activity, 0, intent,
+                android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S ? PendingIntent.FLAG_MUTABLE : 0
+            );
         }
     }
 
